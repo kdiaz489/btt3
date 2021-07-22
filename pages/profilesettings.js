@@ -130,6 +130,11 @@ const profilesettings = () => {
               <option value=''>Option1</option>
             </select>
           </div>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <button className={styles.submitButton} type='submit'>
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

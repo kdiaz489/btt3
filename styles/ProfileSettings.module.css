@@ -33,3 +33,14 @@
 .required {
   color: orange;
 }
+
+.submitButton {
+  width: 100px;
+  background-color: #0b2d43;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+  margin: 20px 0;
+}
