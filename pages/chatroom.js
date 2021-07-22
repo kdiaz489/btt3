@@ -1,7 +1,9 @@
-import { firebaseClient, auth, firestore } from '../firebaseClient';
+import { firebaseClient, auth, firestore } from '../lib/firebaseClient';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
+import styles from '../styles/Chat.module.css';
+import { message } from 'statuses';
 
 const Login = () => {
   const loginWithGoogle = () => {
@@ -16,12 +18,17 @@ const Logout = () => {
 };
 
 const ChatMessage = (props) => {
-  const { text, uid } = props.message;
+  const { text, uid, photoURL } = props.message;
 
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   return (
-    <div>
-      <img src='' alt='' />
+    <div className={`${styles.message} ${styles[messageClass]} `}>
+      <img
+        className={styles.imgChat}
+        src={
+          photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+        }
+      />
       <p>{text}</p>
     </div>
   );
@@ -53,15 +60,16 @@ const chatroom = () => {
           <h1>Chatroom</h1>
           {messages &&
             messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-          <form onSubmit={sendMessage}>
+          <form className={styles.msgForm} onSubmit={sendMessage}>
             <input
               value={formValue}
+              className={styles.formInput}
               onChange={(e) => setFormValue(e.target.value)}
               type='text'
               name=''
               id=''
             />
-            <button>Send</button>
+            <button className={styles.sendMsgButton}>Send</button>
           </form>
         </>
       ) : (
