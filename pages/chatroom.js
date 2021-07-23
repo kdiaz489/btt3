@@ -1,20 +1,29 @@
-import { firebaseClient, auth, firestore } from '../lib/firebaseClient';
+import { Firebase, auth, firestore } from '../lib/firebaseClient';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
 import styles from '../styles/Chat.module.css';
 import { message } from 'statuses';
+import { useAuth } from '../lib/auth';
 
 const Login = () => {
+  const fbAuth = useAuth();
+  console.log(fbAuth);
   const loginWithGoogle = () => {
-    const provider = new firebaseClient.auth.GoogleAuthProvider();
+    const provider = new Firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   };
-  return <button onClick={loginWithGoogle}>Login With Google</button>;
+  return (
+    <button onClick={(e) => fbAuth.signinWithGoogle()}>
+      Login With Google
+    </button>
+  );
 };
 
 const Logout = () => {
-  return auth.currentUser && <button onClick={auth.signOut()}>Log Out</button>;
+  return (
+    auth.currentUser && <button onClick={(e) => auth.signOut()}>Log Out</button>
+  );
 };
 
 const ChatMessage = (props) => {
@@ -35,7 +44,7 @@ const ChatMessage = (props) => {
 };
 
 const chatroom = () => {
-  const [user] = useAuthState(firebaseClient.auth());
+  const [user] = useAuthState(Firebase.auth());
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
   const [messages] = useCollectionData(query, { idField: 'id' });
@@ -46,7 +55,7 @@ const chatroom = () => {
     const { uid, photoURL } = auth.currentUser;
     await messagesRef.add({
       text: formValue,
-      createdAt: firebaseClient.firestore.FieldValue.serverTimestamp(),
+      createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       photoURL,
     });
@@ -58,6 +67,7 @@ const chatroom = () => {
       {user ? (
         <>
           <h1>Chatroom</h1>
+          <Logout />
           {messages &&
             messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
           <form className={styles.msgForm} onSubmit={sendMessage}>
