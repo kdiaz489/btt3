@@ -8,7 +8,6 @@ import { useAuth } from '../lib/auth';
 
 const Login = () => {
   const fbAuth = useAuth();
-  console.log(fbAuth);
   const loginWithGoogle = () => {
     const provider = new Firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
