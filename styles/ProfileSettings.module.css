@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.avatar {
+  width: 10%;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.formContainer {
+  width: 300px;
+}
+
+.formGroup {
+  display: flex;
+  margin: 10px 0;
+}
+
+.input {
+  margin-left: 10px;
+  width: 200px;
+  padding: 5px;
+}
+
+.label {
+  width: 200px;
+}
+
+.required {
+  color: orange;
+}
+
+.submitButton {
+  width: 100px;
+  background-color: #0b2d43;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+  margin: 20px 0;
+}

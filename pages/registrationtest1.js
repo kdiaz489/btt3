@@ -31,8 +31,8 @@ export default function registrationtest1() {
           </div>
           
           
-          
-          
+        
+
           
           <div className={styles.formGroup}>
             
@@ -54,13 +54,6 @@ export default function registrationtest1() {
               placeholder= "Password"
             />
           </div>
-          
-          <div className={styles.agree}>
-            <p>
-              By continuing you agree to our <a style= {{color: 'red'}} href="http://localhost:3000/">Privacy Policy</a> and 
-              <a style= {{color: 'red'}} href="http://localhost:3000/"> Terms and Conditions</a>.
-            </p>
-            </div>
         
           
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -68,6 +61,17 @@ export default function registrationtest1() {
               SIGNUP
             </button>
             
+
+            <div className={styles.agree}>
+            <p>
+              By continuing you agree to our <a style= {{color: 'red'}} href="http://localhost:3000/">Privacy Policy</a> and 
+              <a style= {{color: 'red'}} href="http://localhost:3000/"> Terms and Conditions</a>.
+            </p>
+            </div>
+
+
+
+
           </div><h6>Already own a BTT account?  <a style= {{color: 'blue'}}href='index.php'>Login Here!</a></h6>
         </form>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
