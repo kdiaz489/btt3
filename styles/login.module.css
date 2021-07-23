@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.avatar {
+  width: 10%;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.formContainer {
+  width: 300x;
+}
+
+.formGroup {
+  display: flex;
+  margin: 10px 0;
+}
+
+.input {
+  margin: auto;
+  width: 150px;
+  padding: 5px;
+  text-align: center;
+}
+
+.label {
+  width: 100px;
+}
+
+.required {
+  color: orange;
+}
+
+.submitButton {
+  width: 100px;
+  background-color: hsl(60, 92%, 47%);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+  margin: auto;
+}
+
+.createAccount{
+  padding: 15px;
+  text-align: center;
+  text-emphasis-color: black;
+}
+
+.agree{
+  text-align: center;
+  margin: auto;
+  width: 200px;
+  font-size: 10px
+}
