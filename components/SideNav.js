@@ -12,6 +12,7 @@ const SideNav = ({ open, toggleOpen }) => {
       <button>Services</button>
       <button>Clients</button>
       <button>Contact</button>
+      <button onClick={(e) => router.push('/chatroom')}>Chat</button>
       <button onClick={(e) => router.push('/profilesettings')}>
         Profile Settings
       </button>
