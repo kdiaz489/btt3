@@ -88,10 +88,11 @@
 }
 
 .title2 {
+  margin: 0;
   text-align: center;
   /* display: inline;
-  position: relative;
-  margin-left: 40%; */
+    position: relative;
+    margin-left: 40%; */
   line-height: 2;
   font-size: 3rem;
 }
@@ -192,6 +193,14 @@
   margin-left: 0.5rem;
 }
 
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
 .qrcode {
   width: 125px;
   height: 125px;
@@ -245,15 +254,15 @@
 .backarrow {
   width: 3em;
   height: 3em;
-  margin-top: 1.875em;
-  margin-left: 3.125em;
+  /* margin-top: 1.875em; */
+  /* margin-left: 3.125em; */
 }
 
 .menuicon {
   width: 4.5em;
   height: 4.5em;
-  margin-top: 1.2em;
-  /* margin-left: 42em; */
+  /* margin-top: 1.2em; */
+  /* margin-right: 3.125em; */
 }
 
 .inlineleft {
