@@ -67,19 +67,39 @@ const chatroom = () => {
         <>
           <h1>Chatroom</h1>
           <Logout />
-          {messages &&
-            messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-          <form className={styles.msgForm} onSubmit={sendMessage}>
-            <input
-              value={formValue}
-              className={styles.formInput}
-              onChange={(e) => setFormValue(e.target.value)}
-              type='text'
-              name=''
-              id=''
-            />
-            <button className={styles.sendMsgButton}>Send</button>
-          </form>
+          <div style={{ display: 'grid', gridTemplateColumns: '20% 80%' }}>
+            <div
+              style={{
+                width: '100%',
+                backgroundColor: '#0b2d43',
+              }}></div>
+            <div
+              style={{
+                width: '100%',
+                display: 'grid',
+                gridTemplateRows: '400px 100px',
+              }}>
+              <div style={{ overflow: 'scroll' }}>
+                {messages &&
+                  messages.map((msg) => (
+                    <ChatMessage key={msg.id} message={msg} />
+                  ))}
+              </div>
+              <div>
+                <form className={styles.msgForm} onSubmit={sendMessage}>
+                  <input
+                    value={formValue}
+                    className={styles.formInput}
+                    onChange={(e) => setFormValue(e.target.value)}
+                    type='text'
+                    name=''
+                    id=''
+                  />
+                  <button className={styles.sendMsgButton}>Send</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </>
       ) : (
         <>

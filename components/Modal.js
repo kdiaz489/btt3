@@ -1,15 +1,22 @@
 import styles from '../styles/Modal.module.css';
-const Modal = () => {
+const Modal = ({ open, toggleModal }) => {
+  if (!open) {
+    return null;
+  }
   return (
     <div>
-      <div className={styles.modal}>
-        <div className={styles['modal-content']}>
+      <div className={styles.modal} onClick={toggleModal}>
+        <div
+          className={styles['modal-content']}
+          onClick={(e) => e.stopPropagation()}>
           <div className={styles['modal-header']}>
-            <h4 className={styles['modal-title']}></h4>
+            <h4 className={styles['modal-title']}>Modal Title</h4>
           </div>
           <div className={styles['modal-body']}>This is modal content</div>
           <div className={styles['modal-footer']}>
-            <button className={styles['button']}>Close</button>
+            <button className={styles['button']} onClick={toggleModal}>
+              Close
+            </button>
           </div>
         </div>
       </div>
