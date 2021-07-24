@@ -21,9 +21,10 @@ function Trainingrecords() {
       {/* Nav bar */}
       <div className={styles.navbar}>
         <div>
-          <img
+          <a  href=''>
+            <img
             className={styles.backarrow}
-            src='https://image.flaticon.com/icons/png/512/507/507257.png'></img>
+            src='https://image.flaticon.com/icons/png/512/507/507257.png'></img></a>
         </div>
         <div>
           <h1 className={styles.title2}>Training Records</h1>
@@ -38,7 +39,7 @@ function Trainingrecords() {
       </div>
 
       <div className={styles.bttbg}>
-        <p className={styles.description}>
+        <p className={styles.profiletext}>
           <a className={styles.link} href='https://www.google.com'>
             Profile:
           </a>
@@ -64,38 +65,35 @@ function Trainingrecords() {
                 for completing the Self Awareness course on 7/10/2021
               </p>
             </div>
-            <div>
-              <p className={styles.inlineleft}>
-                <h2> President </h2>
-                <h2>John Doe</h2>
+            <div className={styles.spacedtext}>
+              <p>President
+              <p>John Doe</p>
               </p>
-              <p className={styles.inlineright}>
-                <h2> Tutor </h2>
-                <h2>Lee Mark</h2>
+              <p>Tutor
+              <p>Lee Mark</p>
               </p>
             </div>
           </div>
         </main>
         <div>
-          <p className={styles.print}>Print Certificate</p>{' '}
-          <p className={styles.print}>Print QR Code</p>
+          <a className = {styles.print}>Print Certificate</a>{' '}
           {/* Reason For Traffic Stop Form */}
           <form className={styles.trafficstop}>
             <h2 className={styles.topleft}>Officer Name:</h2>
             <label className={styles.topleft} for='officerName'></label>
-            <input type='text' id='officerName' name='officerName'></input>{' '}
+            <input className={styles.topleftinput} type='text' id='officerName' name='officerName'></input>{' '}
             <br />
             <h2 className={styles.topleft}>Badge Number:</h2>
             <label className={styles.topleft} for='badgeNumber'></label>
-            <input type='text' id='badgeNumber' name='badgeNumber'></input>{' '}
+            <input className={styles.topleftinput} type='text' id='badgeNumber' name='badgeNumber'></input>{' '}
             <br />
             <h2 className={styles.topleft}>Reason for Traffic Stop:</h2>
             <label className={styles.topleft} for='reasonForStop'></label>
-            <textarea rows='5' cols='60' name='reasonForStop'></textarea> <br />
-            <button className={styles.bottomright} type='button'>
+            <textarea className={styles.topleftinput} rows='5' cols='34' name='reasonForStop'></textarea> <br />
+            </form>
+          <button className = {styles.submit} type='button'>
               Submit
             </button>
-          </form>
         </div>
       </div>
     </div>
