@@ -1,5 +1,21 @@
 import styles from '../styles/TrainingRecords.module.css';
-function trainingrecords() {
+import { useEffect, useState } from 'react';
+import QRCode from 'qrcode.react';
+
+
+function Trainingrecords() {
+  
+  const [qrCodeLink,setQrCodeLink] = useState({download: null, href: null});
+  const [urlLink, setUrlLink] = useState("https://www.google.com/");
+
+  useEffect(() => {
+    const canvas = document.getElementById("qr-code");
+    const pngUrl = canvas
+    .toDataURL("image/png")
+    .replace("image/png", "image/octet-stream");
+    setQrCodeLink({download: "qr-code.png", href:pngUrl});
+
+  },[]);
   return (
     <div>
       {/* Nav bar */}
@@ -28,9 +44,12 @@ function trainingrecords() {
           </a>
           &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
           experiences hearing difficulties.
-          <img
-            className={styles.qrcode}
-            src='https://www.dummies.com/wp-content/uploads/324172.image0.jpg'></img>
+          <div className={styles.qrcode}>
+          <QRCode id="qr-code" value={urlLink} />
+          {qrCodeLink.download && 
+          <a id="download-link" download={qrCodeLink.download} href={qrCodeLink.href}> Save QR as Image </a>
+          }
+          </div>
         </p>
         {/* Certificate */}
         <main className={styles.certificate}>
@@ -83,4 +102,4 @@ function trainingrecords() {
   );
 }
 
-export default trainingrecords;
+export default Trainingrecords;
