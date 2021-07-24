@@ -202,12 +202,15 @@
 }
 
 .qrcode {
-  width: 125px;
-  height: 125px;
-  position: relative;
-  left: 20px;
-  top: 40px;
-  right: 0px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+}
+
+.qrcode a {
+  color: rgb(19, 64, 116);
+  text-decoration: underline;
 }
 
 .link {
