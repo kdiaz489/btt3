@@ -6,6 +6,7 @@ import styles from '../styles/Chat.module.css';
 import { message } from 'statuses';
 import { useAuth } from '../lib/auth';
 import NavBar from '../components/Navbar';
+
 const Login = () => {
   const fbAuth = useAuth();
   const loginWithGoogle = () => {
@@ -70,6 +71,7 @@ const chatroom = () => {
       {user ? (
         <>
           <NavBar />
+
           {/* <Logout /> */}
           {/* Main Container */}
           <div

@@ -4,19 +4,27 @@
   justify-content: space-between;
   align-items: center;
   height: 10vh;
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.navbar-decoration {
+  display: flex;
+  flex-direction: row;
+  height: 5vh;
+  background-color: #0b2d43;
 }
 
 .backarrow {
   width: 3em;
   height: 3em;
-  /* margin-top: 1.875em; */
-  /* margin-left: 3.125em; */
 }
 
 .menuicon {
-  width: 4.5em;
-  height: 4.5em;
-  /* margin-top: 1.2em; */
-  /* margin-right: 3.125em; */
+  width: 3em;
+  height: 3em;
+}
+
+.menubutton {
+  border: none;
+  background-color: transparent;
 }
