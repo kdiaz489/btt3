@@ -1,0 +1,64 @@
+.message p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+.message {
+  display: flex;
+  align-items: center;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+.sent p {
+  color: white;
+  background-color: #0b93f6;
+  align-self: flex-end;
+}
+
+.received p {
+  background-color: #e5e5ea;
+  color: black;
+}
+
+.imgChat {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2px 5px;
+}
+
+.msgForm {
+  height: 100%;
+  /* position: fixed; */
+  bottom: 0;
+  background-color: #0b2d43;
+  width: 100%;
+  border: 1px gray solid;
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.sendMsgButton {
+  width: 20%;
+  color: white;
+  border: none;
+  background-color: #0b2d43;
+}
+
+.formInput {
+  line-height: 1.5;
+  width: 100%;
+  font-size: 1.5rem;
+
+  color: black;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+}
