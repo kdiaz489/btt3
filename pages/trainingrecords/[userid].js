@@ -1,27 +1,82 @@
-import styles from '../styles/TrainingRecords.module.css';
+import styles from '../../styles/TrainingRecords.module.css';
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
+import { Firebase, firestore } from '../../lib/firebaseClient';
+import { useRouter } from 'next/router';
+import { runTransaction } from "firebase/firestore";
 
 
 function Trainingrecords() {
-  
+
+  //QR States
+  const liveLink = process.env.LINK || 'http://localhost:3000/trainingrecords/';
   const [qrCodeLink,setQrCodeLink] = useState({download: null, href: null});
-  const [urlLink, setUrlLink] = useState("https://www.google.com/");
+  const [urlLink, setUrlLink] = useState(null);
+
+  // Profile State
+  const [profile,setProfile] = useState({isProfile: false, certification: null});
+  
+
+  // Router
+  const router = useRouter();
+  const { userid } = router.query;
+  const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
+
+  
+  const checkUser = async () => {
+    try {
+      const response = await usersRef.get();
+      if(response.exists) {
+        console.log('here you go');
+      }
+      else {
+        console.log('no');
+      }
+    }
+    catch(error) {
+      console.log('what happened');
+      return;
+    }
+  }
+
+  const handleDownloadLink = () => {
+    if (urlLink) {
+      const canvas = document.getElementById("qr-code");
+      const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+      setQrCodeLink({download: "qr-code.png", href:pngUrl});
+    }
+    return;
+  }
+  
 
   useEffect(() => {
-    const canvas = document.getElementById("qr-code");
-    const pngUrl = canvas
-    .toDataURL("image/png")
-    .replace("image/png", "image/octet-stream");
-    setQrCodeLink({download: "qr-code.png", href:pngUrl});
+    async function manageLoad() {
+    // Check User
+      await checkUser();
+    // Get Download Link for Qr Code Maybe not for Training Records?
+      await handleDownloadLink();
+    }
+
+    manageLoad();
+
+   
 
   },[]);
+  
   return (
+    // Conditon Renders
+    !profile.isProfile? 
+    <div>
+      Profile does not exist....
+    </div>
+    :
     <div>
       {/* Nav bar */}
       <div className={styles.navbar}>
         <div>
-          <a  href=''>
+          <a href=''>
             <img
             className={styles.backarrow}
             src='https://image.flaticon.com/icons/png/512/507/507257.png'></img></a>
