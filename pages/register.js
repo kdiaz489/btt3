@@ -1,28 +1,28 @@
 import Head from 'next/head'
 import styles from '../styles/register.module.css'
-
+import { Firebase, auth, firestore } from '../lib/firebaseClient';
 
 export default function register() {
+ 
     return (
 
         <div className={styles.container}>
           <h1>Beyond The Talk</h1>
-        
-          
 
         <form action=''>
 
         <h2 font='graduate' >CREATE AN ACCOUNT</h2>
+
        <div className={styles.fastLoginButton }>
-            <button >
+            <button>
             <img src='/assets/google.svg' alt="Sign up with Google" />
             </button>
-            <button >
+            <button>
             <img src='/assets/facebook.svg' alt="Sign in with facebook" />
             </button>
             </div>
+        
         <div className={styles.formGroup}>
-            
             <input 
               className={styles.input}
               type='First and Last Name'
@@ -32,9 +32,7 @@ export default function register() {
             />
           </div>
 
-          
           <div className={styles.formGroup}>
-            
             <input 
               className={styles.input}
               type='email'
@@ -61,7 +59,6 @@ export default function register() {
               id='stayloggedin'
               />Stay Logged in</p>
           </div>
-          
 
           <div className={styles.agree}>
             <p>
@@ -75,15 +72,10 @@ export default function register() {
             <button className={styles.submitButton} type='signup'>
               SIGNUP
             </button>
-            
-            
 
-          
-
-          </div><h6>Already own a BTT account?  <a style= {{color: 'blue'}}href='index.php'>Login Here!</a></h6>
+          </div><h6>Already own a SafeStops account?  <a style= {{color: 'blue'}}href='index.php'>Login Here!</a></h6>
         </form>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        
        </div>   
     )
 }

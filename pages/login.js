@@ -1,8 +1,6 @@
 import styles from '../styles/login.module.css';
 import { Firebase, auth, firestore } from '../lib/firebaseClient';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useRef, useState } from 'react';
+
 
 const Login = () => {
   const fbAuth = useAuth();
@@ -24,6 +22,7 @@ const Logout = () => {
 };
 
 const login = () => {
+ 
   return (
 
     <div className={styles.container}>
@@ -32,7 +31,7 @@ const login = () => {
       <h1>Login</h1>
 
       <div className={styles.fastLoginButton }>
-            <button >
+            <button onClick={(e) => fbAuth.signinWithGoogle()}>
             <img src='/assets/google.svg' alt="Sign up with Google" />
             </button>
             <button >
@@ -70,7 +69,7 @@ const login = () => {
                   id='stayloggedin'
                   />Stay Logged in
               </p>
-                <a href="http://localhost:3000/registrationtest1"> forgot password?</a>
+                <a href="http://localhost:3000/"> forgot password?</a>
           </div>
       
       
@@ -87,7 +86,7 @@ const login = () => {
     </div>
 
     )
-    
+
 }
 
 
