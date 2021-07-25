@@ -209,15 +209,14 @@
   padding: 1rem;
   padding-left: 15%;
   padding-right: 15%;
-
 }
 
 .qrcode {
- display: flex;
- align-items: center;
- justify-content: center;
- flex-direction: column;
- padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 40px;
 }
 
 .qrcode a {
@@ -289,11 +288,12 @@
   /* margin-right: 3.125em; */
 }
 
-.profiletext{
+.profiletext {
   text-align: center;
   font-size: 1.5rem;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-top: 0;
 }
 
 .inlineleft {

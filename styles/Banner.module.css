@@ -1,0 +1,18 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fef446;
+  text-transform: uppercase;
+  color: #0b2d43;
+  height: 50vh;
+}
+
+.banner h1 {
+  font-size: 70px;
+  font-family: 'Graduate', 'Times New Roman', Times, serif;
+}
+.banner h2 {
+  font-family: 'Roboto Slab', 'Times New Roman', Times, serif;
+}
