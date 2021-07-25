@@ -1,14 +1,18 @@
 import styles from '../../styles/TrainingRecords.module.css';
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
-import { Firebase, firestore } from '../../lib/firebaseClient';
+import { Firebase, firestore, auth } from '../../lib/firebaseClient';
 import { useRouter } from 'next/router';
 import { runTransaction } from "firebase/firestore";
 import Navbar from '../../components/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuth } from '../../lib/auth';
+
 
 
 function Trainingrecords() {
+
+  const auth = useAuth();
 
   //QR States
   const liveLink = process.env.LINK || 'http://localhost:3000/trainingrecords/';
@@ -30,6 +34,7 @@ function Trainingrecords() {
   const checkUser = async () => {
     try {
       const response = await usersRef.get();
+      console.log(response);
       if(response.exists) {
         const data = response.data();
         setProfile({isProfile: true, certification: data.certification});
@@ -57,7 +62,7 @@ function Trainingrecords() {
   
 
   useEffect(() => {
-    if (!user) return;
+    if(!auth) return;
   
     async function manageLoad() {
     // Check User
@@ -70,15 +75,15 @@ function Trainingrecords() {
 
    
 
-  },[ user ]);
+  },[ auth ]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!auth) return;
     setUrlLink(`${liveLink}${userid}`)
   
 
   
-  }, [profile.certification, user])
+  }, [profile.certification, auth])
 
 
   

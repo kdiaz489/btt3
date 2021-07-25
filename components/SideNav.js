@@ -9,8 +9,7 @@ const SideNav = ({ open, toggleOpen }) => {
   
   // Condition Render Sidebar
   return (
-    fbAuth.user &&
-  (<div className={styles.sidenav} style={{ width: open }}>
+  <div className={styles.sidenav} style={{ width: open }}>
       <button>About</button>
       <button>Services</button>
       <button>Clients</button>
@@ -21,7 +20,7 @@ const SideNav = ({ open, toggleOpen }) => {
         Profile Settings
       </button>
       <button onClick={(e) => fbAuth.signout()}>Log Out</button>
-    </div>)
+    </div>
   );
 };
 
