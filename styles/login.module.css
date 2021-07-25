@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
   border: 1px black solid;
+  font-family: 'Graduate', cursive;
+  
 }
 
 .avatar {
@@ -46,6 +48,13 @@
   margin: auto;
 }
 
+.fastLoginButton {
+  border:none;
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
+}
+
 .createAccount{
   padding: 15px;
   text-align: center;
@@ -57,4 +66,12 @@
   margin: auto;
   width: 200px;
   font-size: 10px
+}
+
+.smallText{
+  font-size: 10px;
+  display: flex;
+  width: 200px;
+  flex-direction:row;
+  justify-content:space-evenly;
 }

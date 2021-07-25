@@ -1,17 +1,26 @@
 import Head from 'next/head'
-import styles from '../styles/login.module.css'
+import styles from '../styles/register.module.css'
 
 
-export default function registrationtest1() {
+export default function register() {
     return (
 
         <div className={styles.container}>
           <h1>Beyond The Talk</h1>
         
+          
+
         <form action=''>
 
-        <h2>CREATE AN ACCOUNT</h2>
-        <img src={/assets/google.svg} alt="Picture of the author" />
+        <h2 font='graduate' >CREATE AN ACCOUNT</h2>
+       <div className={styles.fastLoginButton }>
+            <button >
+            <img src='/assets/google.svg' alt="Sign up with Google" />
+            </button>
+            <button >
+            <img src='/assets/facebook.svg' alt="Sign in with facebook" />
+            </button>
+            </div>
         <div className={styles.formGroup}>
             
             <input 
@@ -45,6 +54,15 @@ export default function registrationtest1() {
             />
           </div>
 
+          <div className={styles.smallText}>
+           <p><input
+              type='checkbox'
+              name='stayloggedin'
+              id='stayloggedin'
+              />Stay Logged in</p>
+          </div>
+          
+
           <div className={styles.agree}>
             <p>
               By continuing you agree to our <a style= {{color: 'red'}} href="http://localhost:3000/">Privacy Policy</a> and 
@@ -52,13 +70,12 @@ export default function registrationtest1() {
             </p>
             </div>
 
-
-
-          
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      
+          <div style={{ display: 'flex', justifyContent: 'column' }}>
             <button className={styles.submitButton} type='signup'>
               SIGNUP
             </button>
+            
             
 
           

@@ -35,8 +35,8 @@
 }
 
 .msgForm {
-  height: 10vh;
-  position: fixed;
+  height: 100%;
+  /* position: fixed; */
   bottom: 0;
   background-color: #0b2d43;
   width: 100%;

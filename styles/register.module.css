@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     border: 1px black solid;
+    font-family: 'Graduate', cursive;
   }
   
   .avatar {
@@ -22,8 +23,9 @@
   
   .input {
     margin: auto;
-    width: 300px;
+    width: 150px;
     padding: 5px;
+    text-align: center;
   }
   
   .label {
@@ -42,12 +44,39 @@
     padding: 10px;
     border-radius: 4px;
     text-transform: capitalize;
-    margin: 20px 0;
+    margin: auto;
   }
-  
   
   .placeholder{
     width: 100px;
     color: black;
     margin: auto;
+  }
+  
+  .fastLoginButton {
+    border:none;
+    display: flex;
+    width: 150px;
+    justify-content: space-around;
+    margin: auto;
+  }
+  
+  .createAccount{
+    padding: 15px;
+    text-align: center;
+    text-emphasis-color: black;
+  }
+  .agree{
+    text-align: center;
+    margin: auto;
+    width: 200px;
+    font-size: 10px
+  }
+  
+  .smallText{
+    font-size: 10px;
+    display: flex;
+    width: 200px;
+    flex-direction:row;
+    justify-content:space-evenly;
   }
