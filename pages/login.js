@@ -27,15 +27,16 @@ const login = () => {
 
     <div className={styles.container}>
       
-      <h1>Beyond The Talk</h1>
-      <h1>Login</h1>
+      <h1 style={{fontFamily: 'Graduate'}}>Beyond The Talk</h1>
+      <h1 style={{fontFamily: 'Graduate'}}>Login</h1>
 
       <div className={styles.fastLoginButton }>
             <button style={{backgroundColor: 'transparent',  border: 'none'}}>
-            <img src='/assets/google.svg' alt="Sign up with Google" />
+              <img src='/assets/google.svg' alt="Sign up with Google" />
             </button>
+
             <button style={{backgroundColor: 'transparent' , border: 'none'}}>
-            <img src='/assets/facebook.svg' alt="Sign in with facebook" />
+              <img src='/assets/login-form-facebook.svg' alt="Sign in with facebook" />
             </button>
       </div>
 
