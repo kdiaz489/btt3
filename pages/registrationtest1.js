@@ -4,21 +4,14 @@ import styles from '../styles/login.module.css'
 
 export default function registrationtest1() {
     return (
-        <div>
-        <Head>
-          <title>My page title</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <script src="https://apis.google.com/js/platform.js" async defer></script>
-        </Head>
 
         <div className={styles.container}>
-          
           <h1>Beyond The Talk</h1>
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        
         <form action=''>
 
         <h2>CREATE AN ACCOUNT</h2>
-
+        <img src={/assets/google.svg} alt="Picture of the author" />
         <div className={styles.formGroup}>
             
             <input 
@@ -29,9 +22,6 @@ export default function registrationtest1() {
               placeholder= "First and Last Name"
             />
           </div>
-          
-          
-        
 
           
           <div className={styles.formGroup}>
@@ -54,15 +44,8 @@ export default function registrationtest1() {
               placeholder= "Password"
             />
           </div>
-        
-          
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button className={styles.submitButton} type='signup'>
-              SIGNUP
-            </button>
-            
 
-            <div className={styles.agree}>
+          <div className={styles.agree}>
             <p>
               By continuing you agree to our <a style= {{color: 'red'}} href="http://localhost:3000/">Privacy Policy</a> and 
               <a style= {{color: 'red'}} href="http://localhost:3000/"> Terms and Conditions</a>.
@@ -71,13 +54,19 @@ export default function registrationtest1() {
 
 
 
+          
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <button className={styles.submitButton} type='signup'>
+              SIGNUP
+            </button>
+            
+
+          
 
           </div><h6>Already own a BTT account?  <a style= {{color: 'blue'}}href='index.php'>Login Here!</a></h6>
         </form>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
-       </div>
-    </div>
-    
+       </div>   
     )
 }
