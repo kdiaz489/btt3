@@ -13,14 +13,14 @@ export default function register() {
 
         <h2 font='graduate' >CREATE AN ACCOUNT</h2>
 
-       <div className={styles.fastLoginButton }>
-            <button>
+        <div className={styles.fastLoginButton }>
+            <button style={{backgroundColor: 'transparent',  border: 'none'}}>
             <img src='/assets/google.svg' alt="Sign up with Google" />
             </button>
-            <button>
+            <button style={{backgroundColor: 'transparent' , border: 'none'}}>
             <img src='/assets/facebook.svg' alt="Sign in with facebook" />
             </button>
-            </div>
+      </div>
         
         <div className={styles.formGroup}>
             <input 

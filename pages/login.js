@@ -31,10 +31,10 @@ const login = () => {
       <h1>Login</h1>
 
       <div className={styles.fastLoginButton }>
-            <button onClick={(e) => fbAuth.signinWithGoogle()}>
+            <button style={{backgroundColor: 'transparent',  border: 'none'}}>
             <img src='/assets/google.svg' alt="Sign up with Google" />
             </button>
-            <button >
+            <button style={{backgroundColor: 'transparent' , border: 'none'}}>
             <img src='/assets/facebook.svg' alt="Sign in with facebook" />
             </button>
       </div>
