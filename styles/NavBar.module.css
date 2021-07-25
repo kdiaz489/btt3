@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  padding: 1rem;
+}
+
+.navbar-decoration {
+  display: flex;
+  flex-direction: row;
+  height: 5vh;
+  background-color: #0b2d43;
+}
+
+.backarrow {
+  width: 2em;
+  height: 2em;
+}
+
+.menuicon {
+  width: 2em;
+  height: 2em;
+}
+
+.menubutton {
+  border: none;
+  background-color: transparent;
+}
