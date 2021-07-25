@@ -1,8 +1,20 @@
 import styles from '../styles/ProfileSettings.module.css';
 import Navbar from '../components/Navbar';
+import Head from 'next/head';
 const profilesettings = () => {
   return (
     <>
+      <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (!document.cookie.includes('auth')) {
+                window.location.href = "/"
+              }
+            `,
+          }}
+        />
+      </Head>
       <Navbar />
       <div className={styles.container}>
         <img
