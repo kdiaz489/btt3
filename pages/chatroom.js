@@ -1,7 +1,7 @@
 import { Firebase, auth, firestore } from '../lib/firebaseClient';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Chat.module.css';
 import { message } from 'statuses';
 import { useAuth } from '../lib/auth';
@@ -47,6 +47,7 @@ const chatroom = () => {
   const dummy = useRef();
   const [user] = useAuthState(Firebase.auth());
   const messagesRef = firestore.collection('messages');
+  const profilesRef = firestore.collection('profiles');
   const query = messagesRef.orderBy('createdAt').limit(25);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
@@ -65,6 +66,32 @@ const chatroom = () => {
     setFormValue('');
     // dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
+  
+  // When user enters chatroom/ after creation/login, it will check and create a certification profile
+  const updateUserProfile = async () => {
+    try {
+      const response = await profilesRef.doc(`${user.uid}-profile`).get();
+      if(!response.exists) {
+        await profilesRef.doc(`${user.uid}-profile`).set({
+          uid: user.uid,
+          certification: false,
+        });
+      }
+      else {
+        console.log('updated already')
+      }
+     
+    }
+    catch(error) {
+      console.log(error);
+    }
+
+  }
+  useEffect(() => {
+    if (!user) return;
+    updateUserProfile();
+    
+  }, [ user ]);
 
   return (
     <section>
