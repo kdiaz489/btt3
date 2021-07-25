@@ -50,10 +50,22 @@
 .logo {
   width: 100px;
   text-align: center;
+  font-size: 28px;
   font-family: 'Graduate', 'Times New Roman', Times, serif;
+  background-color: transparent;
+  border: none;
 }
 
 .menubutton {
   border: none;
   background-color: transparent;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .navbar-right button {
+    width: 90px;
+  }
 }

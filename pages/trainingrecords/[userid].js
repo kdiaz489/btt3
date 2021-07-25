@@ -7,7 +7,7 @@ import { runTransaction } from 'firebase/firestore';
 import Navbar from '../../components/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from '../../lib/auth';
-
+import Head from 'next/head';
 function Trainingrecords() {
   const auth = useAuth();
 
@@ -78,35 +78,25 @@ function Trainingrecords() {
   return (
     // Conditon Renders
     <>
-      <Navbar />
+      <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (!document.cookie.includes('auth')) {
+                window.location.href = "/"
+              }
+            `,
+          }}
+        />
+      </Head>
+      <Navbar>Training Records</Navbar>
       {!profile.isProfile ? (
         <div>Profile does not exist....</div>
       ) : (
         <div>
-          {/* Nav bar */}
-          <div className={styles.navbar}>
-            <div>
-              <a href=''>
-                <img
-                  className={styles.backarrow}
-                  src='https://image.flaticon.com/icons/png/512/507/507257.png'></img>
-              </a>
-            </div>
-            <div>
-              <h1 className={styles.title2}>Training Records</h1>
-            </div>
-            <div>
-              <a href=''>
-                <img
-                  className={styles.menuicon}
-                  src='https://pics.freeicons.io/uploads/icons/png/15211315791553239378-512.png'></img>
-              </a>
-            </div>
-          </div>
-
           <div className={styles.bttbg}>
             <p className={styles.profiletext}>
-              <a className={styles.link} href='#'>
+              <a className={styles.link} href='https://www.google.com'>
                 Profile:
               </a>
               &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
