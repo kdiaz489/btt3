@@ -80,7 +80,7 @@ function Trainingrecords() {
   
   }, [profile.certification, user])
 
-  console.log(urlLink);
+
   
   return (
     // Conditon Renders
@@ -152,6 +152,7 @@ function Trainingrecords() {
               </p>
             </div>
           </div>
+          <a className={styles.print}>Print Certificate</a>
         </main> ):
           (
           <div>
@@ -161,7 +162,7 @@ function Trainingrecords() {
         }
         
         <div>
-          <a className={styles.print}>Print Certificate</a>{' '}
+
           {/* Reason For Traffic Stop Form */}
           <form className={styles.trafficstop}>
             <h2 className={styles.topleft}>Officer Name:</h2>
