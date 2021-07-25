@@ -4,6 +4,8 @@ import QRCode from 'qrcode.react';
 import { Firebase, firestore } from '../../lib/firebaseClient';
 import { useRouter } from 'next/router';
 import { runTransaction } from "firebase/firestore";
+import Navbar from '../../components/Navbar';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 function Trainingrecords() {
@@ -22,12 +24,15 @@ function Trainingrecords() {
   const { userid } = router.query;
   const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
 
+  // User Hook 
+  const [user] = useAuthState(Firebase.auth());
   
   const checkUser = async () => {
     try {
       const response = await usersRef.get();
       if(response.exists) {
-        console.log('here you go');
+        const data = response.data();
+        setProfile({isProfile: true, certification: data.certification});
       }
       else {
         console.log('no');
@@ -52,6 +57,8 @@ function Trainingrecords() {
   
 
   useEffect(() => {
+    if (!user) return;
+  
     async function manageLoad() {
     // Check User
       await checkUser();
@@ -63,11 +70,23 @@ function Trainingrecords() {
 
    
 
-  },[]);
+  },[ user ]);
+
+  useEffect(() => {
+    if (!user) return;
+    setUrlLink(`${liveLink}${userid}`)
+  
+
+  
+  }, [profile.certification, user])
+
+  console.log(urlLink);
   
   return (
     // Conditon Renders
-    !profile.isProfile? 
+    <>
+    <Navbar />
+    {!profile.isProfile? 
     <div>
       Profile does not exist....
     </div>
@@ -101,14 +120,18 @@ function Trainingrecords() {
           &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
           experiences hearing difficulties.
           <div className={styles.qrcode}>
+          {urlLink && 
+          <>
           <QRCode id="qr-code" value={urlLink} />
           {qrCodeLink.download && 
           <a id="download-link" download={qrCodeLink.download} href={qrCodeLink.href}> Save QR as Image </a>
           }
+          </>
+          }
           </div>
         </p>
         {/* Certificate */}
-        <main className={styles.certificate}>
+        {profile.certification? (<main className={styles.certificate}>
           <div>
             <p className={styles.title}>
               CERTIFICATE OF COMPLETION
@@ -129,9 +152,16 @@ function Trainingrecords() {
               </p>
             </div>
           </div>
-        </main>
+        </main> ):
+          (
+          <div>
+
+
+          </div>)   
+        }
+        
         <div>
-          <a className = {styles.print}>Print Certificate</a>{' '}
+          <a className={styles.print}>Print Certificate</a>{' '}
           {/* Reason For Traffic Stop Form */}
           <form className={styles.trafficstop}>
             <h2 className={styles.topleft}>Officer Name:</h2>
@@ -151,7 +181,8 @@ function Trainingrecords() {
             </button>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 }
 
