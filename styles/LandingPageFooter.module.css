@@ -1,0 +1,50 @@
+.footer {
+  width: 100%;
+  height: 100%;
+  /* border-top: 1px solid #eaeaea; */
+  background-color: #0b2d43;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.footer button {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 10px;
+}
+
+.social-links button:hover {
+  background-color: #f14827;
+  cursor: pointer;
+}
+
+.links {
+  padding: 1rem 4rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links a {
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 0.5rem;
+}
+
+.links a:hover {
+  color: #f14827;
+}
+
+.links-left {
+  display: flex;
+  flex-direction: column;
+}
+.links-right {
+  display: flex;
+  flex-direction: column;
+}
