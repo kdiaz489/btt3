@@ -1,8 +1,10 @@
 import styles from '../styles/NavBar.module.css';
 import SideNav from '../components/SideNav';
+import { useAuth } from '../lib/auth';
 import { useState } from 'react';
 const Navbar = () => {
   const [open, setOpen] = useState('0%');
+  const fbAuth = useAuth();
   const toggleOpen = () => {
     setOpen((prev) => {
       if (prev === '0%') {
@@ -12,6 +14,7 @@ const Navbar = () => {
     });
   };
   return (
+    fbAuth.user && 
     <>
       <SideNav open={open} toggleOpen={toggleOpen} />
       <div className={styles['navbar-decoration']}></div>

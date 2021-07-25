@@ -1,27 +1,106 @@
-import styles from '../styles/TrainingRecords.module.css';
+import styles from '../../styles/TrainingRecords.module.css';
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
+import { Firebase, firestore, auth } from '../../lib/firebaseClient';
+import { useRouter } from 'next/router';
+import { runTransaction } from "firebase/firestore";
+import Navbar from '../../components/Navbar';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuth } from '../../lib/auth';
+
 
 
 function Trainingrecords() {
-  
+
+  const auth = useAuth();
+
+  //QR States
+  const liveLink = process.env.LINK || 'http://localhost:3000/trainingrecords/';
   const [qrCodeLink,setQrCodeLink] = useState({download: null, href: null});
-  const [urlLink, setUrlLink] = useState("https://www.google.com/");
+  const [urlLink, setUrlLink] = useState(null);
+
+  // Profile State
+  const [profile,setProfile] = useState({isProfile: false, certification: null});
+  
+
+  // Router
+  const router = useRouter();
+  const { userid } = router.query;
+  const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
+
+  // User Hook 
+  const [user] = useAuthState(Firebase.auth());
+  
+  const checkUser = async () => {
+    try {
+      const response = await usersRef.get();
+      console.log(response);
+      if(response.exists) {
+        const data = response.data();
+        setProfile({isProfile: true, certification: data.certification});
+      }
+      else {
+        console.log('no');
+      }
+    }
+    catch(error) {
+      console.log('what happened');
+      return;
+    }
+  }
+
+  const handleDownloadLink = () => {
+    if (urlLink) {
+      const canvas = document.getElementById("qr-code");
+      const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+      setQrCodeLink({download: "qr-code.png", href:pngUrl});
+    }
+    return;
+  }
+  
 
   useEffect(() => {
-    const canvas = document.getElementById("qr-code");
-    const pngUrl = canvas
-    .toDataURL("image/png")
-    .replace("image/png", "image/octet-stream");
-    setQrCodeLink({download: "qr-code.png", href:pngUrl});
+    if(!auth) return;
+  
+    async function manageLoad() {
+    // Check User
+      await checkUser();
+    // Get Download Link for Qr Code Maybe not for Training Records?
+      await handleDownloadLink();
+    }
 
-  },[]);
+    manageLoad();
+
+   
+
+  },[ auth ]);
+
+  useEffect(() => {
+    if (!auth) return;
+    setUrlLink(`${liveLink}${userid}`)
+  
+
+  
+  }, [profile.certification, auth])
+
+
+  
   return (
+    // Conditon Renders
+    <>
+    <Navbar />
+    {!profile.isProfile? 
+    <div>
+      Profile does not exist....
+    </div>
+    :
     <div>
       {/* Nav bar */}
       <div className={styles.navbar}>
         <div>
-          <a  href=''>
+          <a href=''>
             <img
             className={styles.backarrow}
             src='https://image.flaticon.com/icons/png/512/507/507257.png'></img></a>
@@ -46,14 +125,18 @@ function Trainingrecords() {
           &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
           experiences hearing difficulties.
           <div className={styles.qrcode}>
+          {urlLink && 
+          <>
           <QRCode id="qr-code" value={urlLink} />
           {qrCodeLink.download && 
           <a id="download-link" download={qrCodeLink.download} href={qrCodeLink.href}> Save QR as Image </a>
           }
+          </>
+          }
           </div>
         </p>
         {/* Certificate */}
-        <main className={styles.certificate}>
+        {profile.certification? (<main className={styles.certificate}>
           <div>
             <p className={styles.title}>
               CERTIFICATE OF COMPLETION
@@ -74,9 +157,17 @@ function Trainingrecords() {
               </p>
             </div>
           </div>
-        </main>
+          <a className={styles.print}>Print Certificate</a>
+        </main> ):
+          (
+          <div>
+
+
+          </div>)   
+        }
+        
         <div>
-          <a className = {styles.print}>Print Certificate</a>{' '}
+
           {/* Reason For Traffic Stop Form */}
           <form className={styles.trafficstop}>
             <h2 className={styles.topleft}>Officer Name:</h2>
@@ -96,7 +187,8 @@ function Trainingrecords() {
             </button>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 }
 
