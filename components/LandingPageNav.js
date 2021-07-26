@@ -15,7 +15,7 @@ const LandingPageNav = () => {
   const toggleModal = () => {
     setOpen((prev) => !prev);
   };
-  console.log(auth);
+
   return (
     <>
       <div className={styles['navbar-decoration']}></div>

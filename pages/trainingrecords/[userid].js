@@ -10,7 +10,6 @@ import LandingPageNav from '../../components/LandingPageNav';
 import LandingPageFooter from '../../components/LandingPageFooter';
 import { useQuery } from '../../lib/useQuery';
 
-
 function Trainingrecords() {
   const auth = useAuth();
 
@@ -60,31 +59,30 @@ function Trainingrecords() {
     }
     return;
   };
-  const triggerAnnouncement = async() => {
+  const triggerAnnouncement = async () => {
     if ('scanned' in router.query) {
       // Trigger Function
       const messagesRef = firestore.collection('messages');
       const usersRef = firestore.collection('users').doc(`${userid}`);
-     
+
       const response = await usersRef.get();
       if (response.exists) {
         const data = response.data();
-        
+
         await messagesRef.add({
           text: `${data.name} has been pulled up by a cop. Contact ${data.name}.`,
           createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
           uid: 'announcer-123',
-          photoURL:'https://secure.gravatar.com/avatar/f6c1e857fe07f88e2cd14c35172603ac?d=https://content.invisioncic.com/s281895/monthly_2017_11/B_member_72239.png',
+          photoURL:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Eo_circle_blue_letter-s.svg/512px-Eo_circle_blue_letter-s.svg.png',
         });
         router.push(`/trainingrecords/${userid}`);
-      } 
-   
+      }
+
       router.push(`/trainingrecords/${userid}`);
     }
     return;
-  }
-
-
+  };
 
   useEffect(() => {
     if (!auth) return;
@@ -112,11 +110,9 @@ function Trainingrecords() {
   useEffect(() => {
     if (!query) return;
     triggerAnnouncement();
-    
+
     return;
-  }, [ query ]);
-
-
+  }, [query]);
 
   return (
     // Conditional Renders
@@ -152,21 +148,18 @@ function Trainingrecords() {
               &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
               experiences hearing difficulties.
               <div className={styles.qrcode}>
-              
-                  <>
-                    <QRCode id='qr-code' value={`${urlLink}?scanned=true`} />
-                    {user && qrCodeLink.download && user.uid === userid && (
-                      <a
-                        id='download-link'
-                        download={qrCodeLink.download}
-                        href={qrCodeLink.href}
-                        >
-                        {' '}
-                        Save QR{' '}
-                      </a>
-                    )}
-                  </>
-             
+                <>
+                  <QRCode id='qr-code' value={`${urlLink}?scanned=true`} />
+                  {user && qrCodeLink.download && user.uid === userid && (
+                    <a
+                      id='download-link'
+                      download={qrCodeLink.download}
+                      href={qrCodeLink.href}>
+                      {' '}
+                      Save QR{' '}
+                    </a>
+                  )}
+                </>
               </div>
             </p>
             {/* Certificate */}

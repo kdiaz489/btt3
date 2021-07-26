@@ -8,7 +8,7 @@ const Navbar = ({ children }) => {
   const toggleOpen = () => {
     setOpen((prev) => {
       if (prev === '0%') {
-        return '25%';
+        return '35%';
       }
       return '0%';
     });
@@ -18,15 +18,19 @@ const Navbar = ({ children }) => {
       <SideNav open={open} toggleOpen={toggleOpen} />
       <div className={styles['navbar-decoration']}></div>
       <div className={styles.navbar}>
-        <button
-          style={{ backgroundColor: 'transparent', border: ' none' }}
-          onClick={() => {
-            window.history.back();
-          }}>
-          <img className={styles.backarrow} src='/assets/arrow-left.svg'></img>
-        </button>
         <div>
-          <h1 className={styles.title2}>{children}</h1>
+          <button
+            style={{ backgroundColor: 'transparent', border: ' none' }}
+            onClick={() => {
+              window.history.back();
+            }}>
+            <img
+              className={styles.backarrow}
+              src='/assets/arrow-left.svg'></img>
+          </button>
+        </div>
+        <div>
+          <p className={styles.title}>{children}</p>
         </div>
         <div>
           <button className={styles.menubutton} onClick={toggleOpen}>

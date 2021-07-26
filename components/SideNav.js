@@ -17,7 +17,13 @@ const SideNav = ({ open, toggleOpen, children }) => {
       </button>
       <button onClick={(e) => router.push('/chatroom')}>Chat</button>
       <button onClick={(e) => router.push('/profilesettings')}>Settings</button>
-      <button onClick={(e) => fbAuth.signout()}>Log Out</button>
+      <button
+        onClick={(e) => {
+          router.push('/');
+          return fbAuth.signout();
+        }}>
+        Log Out
+      </button>
     </div>
   );
 };
