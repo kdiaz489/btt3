@@ -65,7 +65,7 @@ const chatroom = () => {
       photoURL,
     });
     setFormValue('');
-    // dummy.current.scrollIntoView({ behavior: 'smooth' });
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   // When user enters chatroom/ after creation/login, it will check and create a certification profile
@@ -78,7 +78,7 @@ const chatroom = () => {
           certification: false,
         });
       } else {
-        console.log('updated already');
+        console.log('Already updated');
       }
     } catch (error) {
       console.log(error);
@@ -103,7 +103,7 @@ const chatroom = () => {
         />
       </Head>
       <>
-        <NavBar />
+        <NavBar>Chat</NavBar>
         {/* Secondary Chat NavBar */}
         <div
           style={{
@@ -255,7 +255,7 @@ const chatroom = () => {
                 messages.map((msg) => (
                   <ChatMessage key={msg.id} message={msg} />
                 ))}
-              {/* <span ref={dummy}></span> */}
+              <span ref={dummy}></span>
             </div>
             <div>
               <form className={styles.msgForm} onSubmit={sendMessage}>

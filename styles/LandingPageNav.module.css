@@ -68,8 +68,9 @@
 @media screen and (max-width: 600px) {
   .navbar {
     flex-direction: column;
+    height: 20vh;
   }
   .navbar-right button {
-    width: 90px;
+    width: 80px;
   }
 }

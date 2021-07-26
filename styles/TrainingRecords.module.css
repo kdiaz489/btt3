@@ -227,7 +227,6 @@
   justify-content: center;
   flex-direction: column;
   padding-top: 40px;
-
 }
 
 .qrcode a {
@@ -328,5 +327,8 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+  .certificatetitle {
+    font-size: 38px;
   }
 }
