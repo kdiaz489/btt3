@@ -90,10 +90,10 @@ function Trainingrecords() {
   // Check for scanned action from url param
   useEffect(() => {
     if (!query) return;
-    console.log(query);
+ 
     if ('scanned' in router.query) {
-      console.log('yes');
       // Trigger Function
+      
       router.push(`/trainingrecords/${userid}`);
     }
     return;
