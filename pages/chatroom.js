@@ -156,7 +156,7 @@ const chatroom = () => {
           style={{
             display: 'grid',
             height: '90vh',
-            gridTemplateColumns: '30% 70%',
+            gridTemplateColumns: '25% 75%',
           }}>
           {/* Left Chat Nav */}
           <div
