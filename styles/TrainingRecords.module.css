@@ -227,9 +227,11 @@
   justify-content: center;
   flex-direction: column;
   padding-top: 40px;
+
 }
 
 .qrcode a {
+  margin-top: 30px;
   color: rgb(19, 64, 116);
   text-decoration: underline;
 }

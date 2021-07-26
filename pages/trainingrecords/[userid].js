@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
 import { Firebase, firestore, auth } from '../../lib/firebaseClient';
 import { useRouter } from 'next/router';
-import { runTransaction } from 'firebase/firestore';
 import Navbar from '../../components/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from '../../lib/auth';
-import Head from 'next/head';
 import LandingPageNav from '../../components/LandingPageNav';
 import LandingPageFooter from '../../components/LandingPageFooter';
+import { useQuery } from '../../lib/useQuery';
+
+
 function Trainingrecords() {
   const auth = useAuth();
 
@@ -26,8 +27,10 @@ function Trainingrecords() {
 
   // Router
   const router = useRouter();
+  const query = useQuery();
 
   const { userid } = router.query;
+
   const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
 
   // User Hook
@@ -36,7 +39,6 @@ function Trainingrecords() {
   const checkUser = async () => {
     try {
       const response = await usersRef.get();
-
       if (response.exists) {
         const data = response.data();
         setProfile({ isProfile: true, certification: data.certification });
@@ -58,6 +60,31 @@ function Trainingrecords() {
     }
     return;
   };
+  const triggerAnnouncement = async() => {
+    if ('scanned' in router.query) {
+      // Trigger Function
+      const messagesRef = firestore.collection('messages');
+      const usersRef = firestore.collection('users').doc(`${userid}`);
+     
+      const response = await usersRef.get();
+      if (response.exists) {
+        const data = response.data();
+        
+        await messagesRef.add({
+          text: `${data.name} has been pulled up by a cop. Contact ${data.name}.`,
+          createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
+          uid: 'announcer-123',
+          photoURL:'https://secure.gravatar.com/avatar/f6c1e857fe07f88e2cd14c35172603ac?d=https://content.invisioncic.com/s281895/monthly_2017_11/B_member_72239.png',
+        });
+        router.push(`/trainingrecords/${userid}`);
+      } 
+   
+      router.push(`/trainingrecords/${userid}`);
+    }
+    return;
+  }
+
+
 
   useEffect(() => {
     if (!auth) return;
@@ -74,12 +101,22 @@ function Trainingrecords() {
     }
 
     manageLoad();
-  }, [auth]);
+  }, [auth, urlLink]);
 
   useEffect(() => {
     if (!auth) return;
     setUrlLink(`${liveLink}${userid}`);
   }, [profile.certification, auth]);
+
+  // Check for scanned action from url param
+  useEffect(() => {
+    if (!query) return;
+    triggerAnnouncement();
+    
+    return;
+  }, [ query ]);
+
+
 
   return (
     // Conditional Renders
@@ -115,20 +152,21 @@ function Trainingrecords() {
               &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
               experiences hearing difficulties.
               <div className={styles.qrcode}>
-                {urlLink && (
+              
                   <>
-                    <QRCode id='qr-code' value={urlLink} />
-                    {qrCodeLink.download && (
+                    <QRCode id='qr-code' value={`${urlLink}?scanned=true`} />
+                    {user && qrCodeLink.download && user.uid === userid && (
                       <a
                         id='download-link'
                         download={qrCodeLink.download}
-                        href={qrCodeLink.href}>
+                        href={qrCodeLink.href}
+                        >
                         {' '}
-                        Save QR as Image{' '}
+                        Save QR{' '}
                       </a>
                     )}
                   </>
-                )}
+             
               </div>
             </p>
             {/* Certificate */}
