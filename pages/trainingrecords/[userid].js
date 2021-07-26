@@ -14,7 +14,8 @@ function Trainingrecords() {
   const auth = useAuth();
 
   //QR States
-  const liveLink = process.env.NEXT_PUBLIC_QRLINK || 'http://localhost:3000/trainingrecords/';
+  const liveLink =
+    process.env.NEXT_PUBLIC_QRLINK || 'http://localhost:3000/trainingrecords/';
   const [qrCodeLink, setQrCodeLink] = useState({ download: null, href: null });
   const [urlLink, setUrlLink] = useState(null);
 
