@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
 import { Firebase, firestore, auth } from '../../lib/firebaseClient';
 import { useRouter } from 'next/router';
-import { runTransaction } from 'firebase/firestore';
 import Navbar from '../../components/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from '../../lib/auth';
 import LandingPageNav from '../../components/LandingPageNav';
 import LandingPageFooter from '../../components/LandingPageFooter';
 import { useQuery } from '../../lib/useQuery';
+
 
 function Trainingrecords() {
   const auth = useAuth();
@@ -40,7 +40,6 @@ function Trainingrecords() {
   const checkUser = async () => {
     try {
       const response = await usersRef.get();
-      console.log('response = ' + response);
       if (response.exists) {
         const data = response.data();
         setProfile({ isProfile: true, certification: data.certification });
@@ -48,7 +47,6 @@ function Trainingrecords() {
         return null;
       }
     } catch (error) {
-      console.log('what happened');
       return null;
     }
   };
@@ -63,6 +61,30 @@ function Trainingrecords() {
     }
     return;
   };
+  const triggerAnnouncement = async() => {
+    if ('scanned' in router.query) {
+      // Trigger Function
+      const messagesRef = firestore.collection('messages');
+      const usersRef = firestore.collection('users').doc(`${userid}`);
+     
+      const response = await usersRef.get();
+      if (response.exists) {
+        const data = response.data();
+        
+        await messagesRef.add({
+          text: `${data.name} has been pulled up by a cop. Contact ${data.name}.`,
+          createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
+          uid: 'announcer-123',
+          photoURL:'https://secure.gravatar.com/avatar/f6c1e857fe07f88e2cd14c35172603ac?d=https://content.invisioncic.com/s281895/monthly_2017_11/B_member_72239.png',
+        });
+        router.push(`/trainingrecords/${userid}`);
+      } 
+   
+      router.push(`/trainingrecords/${userid}`);
+    }
+    return;
+  }
+
 
 
   useEffect(() => {
@@ -90,14 +112,12 @@ function Trainingrecords() {
   // Check for scanned action from url param
   useEffect(() => {
     if (!query) return;
- 
-    if ('scanned' in router.query) {
-      // Trigger Function
-      
-      router.push(`/trainingrecords/${userid}`);
-    }
+    triggerAnnouncement();
+    
     return;
   }, [ query ]);
+
+
 
   return (
     // Conditon Renders
