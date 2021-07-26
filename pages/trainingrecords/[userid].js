@@ -28,7 +28,6 @@ function Trainingrecords() {
   const router = useRouter();
   const { userid } = router.query;
   const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
-  console.log(`usersRef = ${usersRef}`);
 
   // User Hook
   const [user] = useAuthState(Firebase.auth());
@@ -36,7 +35,7 @@ function Trainingrecords() {
   const checkUser = async () => {
     try {
       const response = await usersRef.get();
-      console.log('response = ' + response);
+
       if (response.exists) {
         const data = response.data();
         setProfile({ isProfile: true, certification: data.certification });
@@ -83,7 +82,7 @@ function Trainingrecords() {
   }, [profile.certification, auth]);
 
   return (
-    // Conditon Renders
+    // Conditional Renders
     <>
       {!profile.isProfile ? (
         <div>
@@ -107,7 +106,8 @@ function Trainingrecords() {
         </div>
       ) : (
         <div>
-          <Navbar>Training Records</Navbar>
+          {console.log(auth)}
+          {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
           <div className={styles.bttbg}>
             <p className={styles.profiletext}>
               <a className={styles.link} href='https://www.google.com'>
@@ -148,10 +148,10 @@ function Trainingrecords() {
                   />
                 </div>
                 <div>
-                  <p className={styles.certificatetitle}>
+                  <div className={styles.certificatetitle}>
                     CERTIFICATE OF COMPLETION
                     <p className={styles.description}>Beyond The Talk awards</p>
-                  </p>
+                  </div>
                   <div className={styles.title}>
                     Zane Joe
                     <p className={styles.description}>
@@ -159,14 +159,14 @@ function Trainingrecords() {
                     </p>
                   </div>
                   <div className={styles.spacedtext}>
-                    <p>
+                    <div>
                       President
                       <p>John Doe</p>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                       Tutor
                       <p>Lee Mark</p>
-                    </p>
+                    </div>
                   </div>
                 </div>
                 <a className={styles.print}>Print Certificate</a>
@@ -179,7 +179,7 @@ function Trainingrecords() {
               {/* Reason For Traffic Stop Form */}
               <form className={styles.trafficstop}>
                 <h2 className={styles.topleft}>Officer Name:</h2>
-                <label className={styles.topleft} for='officerName'></label>
+                <label className={styles.topleft} htmlFor='officerName'></label>
                 <input
                   className={styles.topleftinput}
                   type='text'
@@ -187,7 +187,7 @@ function Trainingrecords() {
                   name='officerName'></input>{' '}
                 <br />
                 <h2 className={styles.topleft}>Badge Number:</h2>
-                <label className={styles.topleft} for='badgeNumber'></label>
+                <label className={styles.topleft} htmlFor='badgeNumber'></label>
                 <input
                   className={styles.topleftinput}
                   type='text'
@@ -195,7 +195,9 @@ function Trainingrecords() {
                   name='badgeNumber'></input>{' '}
                 <br />
                 <h2 className={styles.topleft}>Reason for Traffic Stop:</h2>
-                <label className={styles.topleft} for='reasonForStop'></label>
+                <label
+                  className={styles.topleft}
+                  htmlFor='reasonForStop'></label>
                 <textarea
                   className={styles.topleftinput}
                   style={{ width: '60%' }}

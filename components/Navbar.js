@@ -14,31 +14,27 @@ const Navbar = ({ children }) => {
     });
   };
   return (
-    fbAuth.user && (
-      <>
-        <SideNav open={open} toggleOpen={toggleOpen} />
-        <div className={styles['navbar-decoration']}></div>
-        <div className={styles.navbar}>
-          <button
-            style={{ backgroundColor: 'transparent', border: ' none' }}
-            onClick={() => {
-              window.history.back();
-            }}>
-            <img
-              className={styles.backarrow}
-              src='/assets/arrow-left.svg'></img>
-          </button>
-          <div>
-            <h1 className={styles.title2}>{children}</h1>
-          </div>
-          <div>
-            <button className={styles.menubutton} onClick={toggleOpen}>
-              <img className={styles.menuicon} src='/assets/menu.svg' />
-            </button>
-          </div>
+    <>
+      <SideNav open={open} toggleOpen={toggleOpen} />
+      <div className={styles['navbar-decoration']}></div>
+      <div className={styles.navbar}>
+        <button
+          style={{ backgroundColor: 'transparent', border: ' none' }}
+          onClick={() => {
+            window.history.back();
+          }}>
+          <img className={styles.backarrow} src='/assets/arrow-left.svg'></img>
+        </button>
+        <div>
+          <h1 className={styles.title2}>{children}</h1>
         </div>
-      </>
-    )
+        <div>
+          <button className={styles.menubutton} onClick={toggleOpen}>
+            <img className={styles.menuicon} src='/assets/menu.svg' />
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

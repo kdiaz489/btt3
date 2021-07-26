@@ -1,13 +1,17 @@
 import styles from '../styles/LandingPageNav.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LoginForm from './LoginForm';
 import { useAuth } from '../lib/auth';
 import { useRouter } from 'next/router';
-import Modal from '../components/Modal';
+import Modal from './Modal';
+import RegisterForm from './RegisterForm';
+
 const LandingPageNav = () => {
   const auth = useAuth();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('login');
+
   const toggleModal = () => {
     setOpen((prev) => !prev);
   };
@@ -30,7 +34,17 @@ const LandingPageNav = () => {
             <>
               <button onClick={toggleModal}>Login</button>
               <Modal title='Login' open={open} toggleModal={toggleModal}>
-                <LoginForm />
+                {modalContent === 'login' ? (
+                  <LoginForm
+                    modalContent={modalContent}
+                    setModalContent={setModalContent}
+                  />
+                ) : (
+                  <RegisterForm
+                    modalContent={modalContent}
+                    setModalContent={setModalContent}
+                  />
+                )}
               </Modal>
             </>
           ) : (
