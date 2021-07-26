@@ -7,9 +7,10 @@ import { runTransaction } from 'firebase/firestore';
 import Navbar from '../../components/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from '../../lib/auth';
-import Head from 'next/head';
 import LandingPageNav from '../../components/LandingPageNav';
 import LandingPageFooter from '../../components/LandingPageFooter';
+import { useQuery } from '../../lib/useQuery';
+
 function Trainingrecords() {
   const auth = useAuth();
 
@@ -26,9 +27,12 @@ function Trainingrecords() {
 
   // Router
   const router = useRouter();
+  const query = useQuery();
+
   const { userid } = router.query;
+
   const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
-  console.log(`usersRef = ${usersRef}`);
+
 
   // User Hook
   const [user] = useAuthState(Firebase.auth());
@@ -60,6 +64,7 @@ function Trainingrecords() {
     return;
   };
 
+
   useEffect(() => {
     if (!auth) return;
 
@@ -75,12 +80,24 @@ function Trainingrecords() {
     }
 
     manageLoad();
-  }, [auth]);
+  }, [auth, urlLink]);
 
   useEffect(() => {
     if (!auth) return;
     setUrlLink(`${liveLink}${userid}`);
   }, [profile.certification, auth]);
+
+  // Check for scanned action from url param
+  useEffect(() => {
+    if (!query) return;
+    console.log(query);
+    if ('scanned' in router.query) {
+      console.log('yes');
+      // Trigger Function
+      router.push(`/trainingrecords/${userid}`);
+    }
+    return;
+  }, [ query ]);
 
   return (
     // Conditon Renders
@@ -116,20 +133,21 @@ function Trainingrecords() {
               &nbsp; Zane is 5'4", 20 years old and has mild ADHD. She sometimes
               experiences hearing difficulties.
               <div className={styles.qrcode}>
-                {urlLink && (
+              
                   <>
-                    <QRCode id='qr-code' value={urlLink} />
-                    {qrCodeLink.download && (
+                    <QRCode id='qr-code' value={`${urlLink}?scanned=true`} />
+                    {user && qrCodeLink.download && user.uid === userid && (
                       <a
                         id='download-link'
                         download={qrCodeLink.download}
-                        href={qrCodeLink.href}>
+                        href={qrCodeLink.href}
+                        >
                         {' '}
-                        Save QR as Image{' '}
+                        Save QR{' '}
                       </a>
                     )}
                   </>
-                )}
+             
               </div>
             </p>
             {/* Certificate */}
