@@ -51,7 +51,7 @@ const chatroom = () => {
   const query = messagesRef.orderBy('createdAt').limit(25);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
-  console.log(messages);
+  console.log(user);
   const [formValue, setFormValue] = useState('');
 
   const sendMessage = async (e) => {
@@ -103,12 +103,59 @@ const chatroom = () => {
       </Head>
       <>
         <NavBar />
+        {/* Secondary Chat NavBar */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            borderTop: '1px #0b2d43 solid',
+          }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '5px 20px',
+            }}>
+            <img width='40px' src='/assets/home.svg' alt='homeicon' />
+            <span>Home</span>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '5px 20px',
+              backgroundColor: '#f14827',
+            }}>
+            <img
+              width='40px'
+              src='/assets/message-square.svg'
+              alt='messagesquareicon'
+            />
+            <span>Chat</span>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '5px 20px',
+            }}>
+            <img width='40px' src='/assets/users.svg' alt='contactsicon' />
+            <span>Contacts</span>
+          </div>
+        </div>
         {/* Main Container */}
         <div
           style={{
             display: 'grid',
             height: '90vh',
-            gridTemplateColumns: '20% 80%',
+            gridTemplateColumns: '30% 70%',
           }}>
           {/* Left Chat Nav */}
           <div
@@ -118,13 +165,50 @@ const chatroom = () => {
             }}>
             <div
               style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-evenly',
                 backgroundColor: '#394e5b',
-                textAlign: 'center',
                 borderRadius: '15px',
-                padding: '0.2rem',
+                marginTop: '20px',
+                height: '3.5rem',
               }}>
-              <p style={{ fontFamily: 'Graduate', color: 'white' }}>
+              <p
+                style={{
+                  fontFamily: 'Graduate',
+                  color: 'white',
+                  fontSize: '20px',
+                }}>
+                S
+              </p>
+              <p
+                style={{
+                  fontFamily: 'Roboto Slab',
+                  color: 'white',
+                  textAlign: 'center',
+                }}>
                 SafeStops
+              </p>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-evenly',
+
+                marginTop: '20px',
+                height: '3.5rem',
+              }}>
+              <img src='/assets/certificateicon.svg' alt='' />
+              <p
+                style={{
+                  fontFamily: 'Roboto Slab',
+                  color: 'white',
+                  textAlign: 'center',
+                }}>
+                {user ? user.displayName : 'Zane'}
               </p>
             </div>
           </div>
@@ -133,9 +217,38 @@ const chatroom = () => {
             style={{
               width: '100%',
               display: 'grid',
-
-              gridTemplateRows: '800px 100px',
+              gridTemplateRows: '60px 800px 100px',
             }}>
+            {/* Right Side of Chat - NavBar */}
+            <div
+              style={{
+                backgroundColor: '#f0ebeb',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+              }}>
+              <img
+                style={{ padding: '10px' }}
+                src='/assets/paperclip.svg'
+                alt='paperclipicon'
+              />
+              <img
+                style={{ padding: '10px' }}
+                src='/assets/mic.svg'
+                alt='micicon'
+              />
+              <img
+                style={{ padding: '10px' }}
+                src='/assets/phone.svg'
+                alt='phoneicon'
+              />
+              <img
+                style={{ padding: '10px' }}
+                src='/assets/video.svg'
+                alt='videoicon'
+              />
+            </div>
             <div style={{ overflowY: 'scroll' }}>
               {messages &&
                 messages.map((msg) => (
