@@ -1,6 +1,12 @@
 .hero {
   background-image: url('/assets/heroimage.jpg');
-  height: 50vh;
+  height: 70vh;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    height: 50vh;
+  }
 }

@@ -8,6 +8,8 @@ import Navbar from '../../components/Navbar';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from '../../lib/auth';
 import Head from 'next/head';
+import LandingPageNav from '../../components/LandingPageNav';
+import LandingPageFooter from '../../components/LandingPageFooter';
 function Trainingrecords() {
   const auth = useAuth();
 
@@ -24,6 +26,7 @@ function Trainingrecords() {
 
   // Router
   const router = useRouter();
+
   const { userid } = router.query;
   const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
 
@@ -33,16 +36,15 @@ function Trainingrecords() {
   const checkUser = async () => {
     try {
       const response = await usersRef.get();
-      console.log(response);
+
       if (response.exists) {
         const data = response.data();
         setProfile({ isProfile: true, certification: data.certification });
       } else {
-        console.log('no');
+        return null;
       }
     } catch (error) {
-      console.log('what happened');
-      return;
+      return null;
     }
   };
 
@@ -62,9 +64,13 @@ function Trainingrecords() {
 
     async function manageLoad() {
       // Check User
-      await checkUser();
+      try {
+        await checkUser();
+        await handleDownloadLink();
+      } catch (error) {
+        return;
+      }
       // Get Download Link for Qr Code Maybe not for Training Records?
-      await handleDownloadLink();
     }
 
     manageLoad();
@@ -76,24 +82,31 @@ function Trainingrecords() {
   }, [profile.certification, auth]);
 
   return (
-    // Conditon Renders
+    // Conditional Renders
     <>
-      <Head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (!document.cookie.includes('auth')) {
-                window.location.href = "/"
-              }
-            `,
-          }}
-        />
-      </Head>
-      <Navbar>Training Records</Navbar>
       {!profile.isProfile ? (
-        <div>Profile does not exist....</div>
+        <div>
+          {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
+          <div
+            style={{
+              height: '70vh',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              border: '1px black solid',
+              margin: '2rem',
+            }}>
+            <img src='/assets/frown.svg' alt='frownface' width='15%' />
+            <h1>The certificate #{userid} does not exist.</h1>
+            <h2>Please scan a valid QR code.</h2>
+          </div>
+          <LandingPageFooter></LandingPageFooter>
+        </div>
       ) : (
         <div>
+          {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
           <div className={styles.bttbg}>
             <p className={styles.profiletext}>
               <a className={styles.link} href='https://www.google.com'>
@@ -121,11 +134,23 @@ function Trainingrecords() {
             {/* Certificate */}
             {profile.certification ? (
               <main className={styles.certificate}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                  }}>
+                  <img
+                    style={{ width: '15%' }}
+                    src='/assets/certificateicon.svg'
+                    alt='certificateicon'
+                  />
+                </div>
                 <div>
-                  <p className={styles.title}>
+                  <div className={styles.certificatetitle}>
                     CERTIFICATE OF COMPLETION
                     <p className={styles.description}>Beyond The Talk awards</p>
-                  </p>
+                  </div>
                   <div className={styles.title}>
                     Zane Joe
                     <p className={styles.description}>
@@ -133,14 +158,14 @@ function Trainingrecords() {
                     </p>
                   </div>
                   <div className={styles.spacedtext}>
-                    <p>
+                    <div>
                       President
                       <p>John Doe</p>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                       Tutor
                       <p>Lee Mark</p>
-                    </p>
+                    </div>
                   </div>
                 </div>
                 <a className={styles.print}>Print Certificate</a>
@@ -153,7 +178,7 @@ function Trainingrecords() {
               {/* Reason For Traffic Stop Form */}
               <form className={styles.trafficstop}>
                 <h2 className={styles.topleft}>Officer Name:</h2>
-                <label className={styles.topleft} for='officerName'></label>
+                <label className={styles.topleft} htmlFor='officerName'></label>
                 <input
                   className={styles.topleftinput}
                   type='text'
@@ -161,7 +186,7 @@ function Trainingrecords() {
                   name='officerName'></input>{' '}
                 <br />
                 <h2 className={styles.topleft}>Badge Number:</h2>
-                <label className={styles.topleft} for='badgeNumber'></label>
+                <label className={styles.topleft} htmlFor='badgeNumber'></label>
                 <input
                   className={styles.topleftinput}
                   type='text'
@@ -169,17 +194,27 @@ function Trainingrecords() {
                   name='badgeNumber'></input>{' '}
                 <br />
                 <h2 className={styles.topleft}>Reason for Traffic Stop:</h2>
-                <label className={styles.topleft} for='reasonForStop'></label>
+                <label
+                  className={styles.topleft}
+                  htmlFor='reasonForStop'></label>
                 <textarea
                   className={styles.topleftinput}
+                  style={{ width: '60%' }}
                   rows='5'
-                  cols='34'
                   name='reasonForStop'></textarea>{' '}
                 <br />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    padding: '0 2rem',
+                  }}>
+                  <button className={styles.submit} type='button'>
+                    Submit
+                  </button>
+                </div>
               </form>
-              <button className={styles.submit} type='button'>
-                Submit
-              </button>
             </div>
           </div>
         </div>

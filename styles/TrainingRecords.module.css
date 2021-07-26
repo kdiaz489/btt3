@@ -68,10 +68,19 @@
   margin: 0;
   line-height: 1.15;
   font-size: 3rem;
+  font-family: 'Graduate', serif;
 }
 
 .title,
 .description {
+  text-align: center;
+}
+
+.certificatetitle {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 3rem;
+  font-family: 'IBM Plex Sans' sans-serif;
   text-align: center;
 }
 
@@ -104,6 +113,7 @@
 .description {
   line-height: 5;
   font-size: 1.5rem;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .description2 {
@@ -250,8 +260,13 @@
 }
 
 .submit {
+  background-color: #0b2d43;
+  color: white;
+  border: none;
   margin-top: 20px;
   font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
 }
 
 .print {
