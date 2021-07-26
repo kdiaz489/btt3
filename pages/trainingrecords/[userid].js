@@ -74,7 +74,7 @@ function Trainingrecords() {
           text: `${data.name} has been pulled up by a cop. Contact ${data.name}.`,
           createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
           uid: 'announcer-123',
-          photoURL:'https://secure.gravatar.com/avatar/f6c1e857fe07f88e2cd14c35172603ac?d=https://content.invisioncic.com/s281895/monthly_2017_11/B_member_72239.png',
+          photoURL:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Eo_circle_blue_letter-s.svg/512px-Eo_circle_blue_letter-s.svg.png',
         });
         router.push(`/trainingrecords/${userid}`);
       } 
