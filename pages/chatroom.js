@@ -7,6 +7,7 @@ import { message } from 'statuses';
 import { useAuth } from '../lib/auth';
 import NavBar from '../components/Navbar';
 import Head from 'next/head';
+
 const Login = () => {
   const fbAuth = useAuth();
   const loginWithGoogle = () => {
