@@ -26,6 +26,7 @@ function Trainingrecords() {
 
   // Router
   const router = useRouter();
+
   const { userid } = router.query;
   const usersRef = firestore.collection('profiles').doc(`${userid}-profile`);
 
@@ -43,7 +44,6 @@ function Trainingrecords() {
         return null;
       }
     } catch (error) {
-      console.log('what happened');
       return null;
     }
   };
@@ -86,7 +86,7 @@ function Trainingrecords() {
     <>
       {!profile.isProfile ? (
         <div>
-          <LandingPageNav />
+          {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
           <div
             style={{
               height: '70vh',
@@ -106,7 +106,6 @@ function Trainingrecords() {
         </div>
       ) : (
         <div>
-          {console.log(auth)}
           {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
           <div className={styles.bttbg}>
             <p className={styles.profiletext}>
