@@ -19,11 +19,15 @@ const Navbar = ({ children }) => {
         <SideNav open={open} toggleOpen={toggleOpen} />
         <div className={styles['navbar-decoration']}></div>
         <div className={styles.navbar}>
-          <div>
+          <button
+            style={{ backgroundColor: 'transparent', border: ' none' }}
+            onClick={() => {
+              window.history.back();
+            }}>
             <img
               className={styles.backarrow}
               src='/assets/arrow-left.svg'></img>
-          </div>
+          </button>
           <div>
             <h1 className={styles.title2}>{children}</h1>
           </div>

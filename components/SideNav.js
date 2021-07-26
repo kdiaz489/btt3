@@ -10,18 +10,13 @@ const SideNav = ({ open, toggleOpen, children }) => {
   // Condition Render Sidebar
   return (
     <div className={styles.sidenav} style={{ width: open }}>
-      <button>About</button>
-      <button>Services</button>
-      <button>Clients</button>
-      <button>Contact</button>
+      <p className={styles.navlogo}>SafeStops</p>
       <button
         onClick={(e) => router.push(`/trainingrecords/${fbAuth.user.uid}`)}>
         Training Records
       </button>
       <button onClick={(e) => router.push('/chatroom')}>Chat</button>
-      <button onClick={(e) => router.push('/profilesettings')}>
-        Profile Settings
-      </button>
+      <button onClick={(e) => router.push('/profilesettings')}>Settings</button>
       <button onClick={(e) => fbAuth.signout()}>Log Out</button>
     </div>
   );

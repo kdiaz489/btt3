@@ -7,13 +7,12 @@ const Modal = ({ open, toggleModal, title, children }) => {
 
   return (
     <div>
-      <button onClick={toggleModal}>{title}</button>
       <div className={styles.modal} onClick={toggleModal}>
         <div
           className={styles['modal-content']}
           onClick={(e) => e.stopPropagation()}>
           <div className={styles['modal-header']}>
-            <h4 className={styles['modal-title']}>Modal Title</h4>
+            <h4 className={styles['modal-title']}>{title}</h4>
           </div>
           <div className={styles['modal-body']}>{children}</div>
           <div className={styles['modal-footer']}>

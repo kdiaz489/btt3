@@ -103,8 +103,6 @@ const chatroom = () => {
       </Head>
       <>
         <NavBar />
-
-        {/* <Logout /> */}
         {/* Main Container */}
         <div
           style={{
@@ -112,11 +110,25 @@ const chatroom = () => {
             height: '90vh',
             gridTemplateColumns: '20% 80%',
           }}>
+          {/* Left Chat Nav */}
           <div
             style={{
               width: '100%',
               backgroundColor: '#0b2d43',
-            }}></div>
+            }}>
+            <div
+              style={{
+                backgroundColor: '#394e5b',
+                textAlign: 'center',
+                borderRadius: '15px',
+                padding: '0.2rem',
+              }}>
+              <p style={{ fontFamily: 'Graduate', color: 'white' }}>
+                SafeStops
+              </p>
+            </div>
+          </div>
+          {/* Right Side of Chat */}
           <div
             style={{
               width: '100%',
