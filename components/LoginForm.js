@@ -2,13 +2,7 @@ import styles from '../styles/login.module.css';
 import { useAuth } from '../lib/auth';
 import { Firebase, auth, firestore } from '../lib/firebaseClient';
 
-const Logout = () => {
-  return (
-    auth.currentUser && <button onClick={(e) => auth.signOut()}>Log Out</button>
-  );
-};
-
-const LoginForm = () => {
+const LoginForm = ({ modalContent, setModalContent }) => {
   const fbAuth = useAuth();
   return (
     <div className={styles.container}>
@@ -58,7 +52,7 @@ const LoginForm = () => {
             <input type='checkbox' name='stayloggedin' id='stayloggedin' />
             Stay Logged in
           </p>
-          <a href='http://localhost:3000/'> forgot password?</a>
+          <a href='http://localhost:3000/'> Forgot password?</a>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -68,7 +62,10 @@ const LoginForm = () => {
         </div>
 
         <div className={styles.createAccount}>
-          <a href='http://localhost:3000/register'> Create an Account</a>
+          <button onClick={(e) => setModalContent('register')}>
+            {' '}
+            Create an Account
+          </button>
         </div>
       </form>
     </div>

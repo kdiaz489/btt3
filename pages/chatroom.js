@@ -7,6 +7,7 @@ import { message } from 'statuses';
 import { useAuth } from '../lib/auth';
 import NavBar from '../components/Navbar';
 import Head from 'next/head';
+
 const Login = () => {
   const fbAuth = useAuth();
   const loginWithGoogle = () => {
@@ -155,7 +156,7 @@ const chatroom = () => {
           style={{
             display: 'grid',
             height: '90vh',
-            gridTemplateColumns: '30% 70%',
+            gridTemplateColumns: '25% 75%',
           }}>
           {/* Left Chat Nav */}
           <div
