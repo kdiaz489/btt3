@@ -33,7 +33,7 @@ const LandingPageNav = () => {
           {!auth.user ? (
             <>
               <button onClick={toggleModal}>Login</button>
-              <Modal title='Login' open={open} toggleModal={toggleModal}>
+              <Modal open={open} toggleModal={toggleModal}>
                 {modalContent === 'login' ? (
                   <LoginForm
                     modalContent={modalContent}

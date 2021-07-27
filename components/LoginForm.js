@@ -6,7 +6,7 @@ const LoginForm = ({ modalContent, setModalContent }) => {
   const fbAuth = useAuth();
   return (
     <div className={styles.container}>
-      <h1 style={{ fontFamily: 'Graduate' }}>Beyond The Talk</h1>
+      <h1 style={{ fontFamily: 'Graduate' }}>SafeStops</h1>
       <h1 style={{ fontFamily: 'Graduate' }}>Login</h1>
 
       <div className={styles.fastLoginButton}>

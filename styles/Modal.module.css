@@ -20,8 +20,14 @@
   padding: 10px;
 }
 
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .modal-title {
   margin: 0;
+  text-align: center;
 }
 
 .modal-body {
