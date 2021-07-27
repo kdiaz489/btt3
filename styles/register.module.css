@@ -1,82 +1,82 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px black solid;
-    font-family: 'Graduate', cursive;
-  }
-  
-  .avatar {
-    width: 10%;
-    background-color: red;
-    border-radius: 50%;
-  }
-  
-  .formContainer {
-    width: 300x;
-  }
-  
-  .formGroup {
-    display: flex;
-    margin: 10px 0;
-  }
-  
-  .input {
-    margin: auto;
-    width: 150px;
-    padding: 5px;
-    text-align: center;
-  }
-  
-  .label {
-    width: 100px;
-  }
-  
-  .required {
-    color: orange;
-  }
-  
-  .submitButton {
-    width: 100px;
-    background-color: #0b2d43;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    text-transform: capitalize;
-    margin: auto;
-  }
-  
-  .placeholder{
-    width: 100px;
-    color: black;
-    margin: auto;
-  }
-  
-  .fastLoginButton {
-    border:none;
-    display: flex;
-    width: 150px;
-    justify-content: space-around;
-    margin: auto;
-  }
-  
-  .createAccount{
-    padding: 15px;
-    text-align: center;
-    text-emphasis-color: black;
-  }
-  .agree{
-    text-align: center;
-    margin: auto;
-    width: 200px;
-    font-size: 10px
-  }
-  
-  .smallText{
-    font-size: 10px;
-    display: flex;
-    width: 200px;
-    flex-direction:row;
-    justify-content:space-evenly;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: 'Graduate', cursive;
+}
+
+.avatar {
+  width: 10%;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.formContainer {
+  width: 300x;
+}
+
+.formGroup {
+  display: flex;
+  margin: 10px 0;
+}
+
+.input {
+  margin: auto;
+  width: 150px;
+  padding: 5px;
+  text-align: center;
+}
+
+.label {
+  width: 100px;
+}
+
+.required {
+  color: orange;
+}
+
+.submitButton {
+  width: 100px;
+  background-color: #0b2d43;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+  margin: auto;
+}
+
+.placeholder {
+  width: 100px;
+  color: black;
+  margin: auto;
+}
+
+.fastLoginButton {
+  border: none;
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.createAccount {
+  padding: 15px;
+  text-align: center;
+  text-emphasis-color: black;
+}
+.agree {
+  text-align: center;
+  margin: auto;
+  width: 200px;
+  font-size: 10px;
+}
+
+.smallText {
+  font-size: 10px;
+  display: flex;
+  width: 200px;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

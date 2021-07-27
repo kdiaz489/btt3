@@ -3,7 +3,7 @@ import styles from '../styles/register.module.css';
 const RegisterForm = ({ modalContent, setModalContent }) => {
   return (
     <div className={styles.container}>
-      <h1>Beyond The Talk</h1>
+      <h1>SafeStops</h1>
       <h2 font='graduate'>CREATE AN ACCOUNT</h2>
 
       <form action=''>
