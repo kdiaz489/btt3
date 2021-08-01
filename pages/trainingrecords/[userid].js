@@ -220,7 +220,11 @@ function Trainingrecords() {
               <div></div>
             )}
 
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}>
               {/* Reason For Traffic Stop Form */}
               <form className={styles.trafficstop}>
                 <h2 className={styles.topleft}>Officer Name:</h2>
