@@ -9,6 +9,7 @@ import { useAuth } from '../../lib/auth';
 import LandingPageNav from '../../components/LandingPageNav';
 import LandingPageFooter from '../../components/LandingPageFooter';
 import { useQuery } from '../../lib/useQuery';
+import Loader from '../../components/Loader';
 
 function Trainingrecords() {
   const auth = useAuth();
@@ -24,6 +25,9 @@ function Trainingrecords() {
     isProfile: false,
     certification: null,
   });
+
+  //Loaded State
+  const [loaded, setLoaded] = useState(true);
 
   // Router
   const router = useRouter();
@@ -87,15 +91,18 @@ function Trainingrecords() {
 
   useEffect(() => {
     if (!auth) return;
-
     async function manageLoad() {
       // Check User
       try {
+        setLoaded(false);
         await checkUser();
-        await handleDownloadLink();
+        await handleDownloadLink();;
+        setLoaded(true);
       } catch (error) {
+        setLoaded(true);
         return;
       }
+     
       // Get Download Link for Qr Code Maybe not for Training Records?
     }
 
@@ -117,30 +124,37 @@ function Trainingrecords() {
 
   return (
     // Conditional Renders
+
     <>
       {!profile.isProfile ? (
         <div>
           {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
-          <div
-            style={{
-              height: '70vh',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              border: '1px black solid',
-              margin: '2rem',
-            }}>
-            <img src='/assets/frown.svg' alt='frownface' width='15%' />
-            <h1>The certificate #{userid} does not exist.</h1>
-            <h2>Please scan a valid QR code.</h2>
-          </div>
-          <LandingPageFooter></LandingPageFooter>
-        </div>
+          {!loaded ? <Loader />
+          : 
+          <>
+            <div
+              style={{
+                height: '70vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                border: '1px black solid',
+                margin: '2rem',
+              }}>
+              <img src='/assets/frown.svg' alt='frownface' width='15%' />
+              <h1>The certificate #{userid} does not exist.</h1>
+              <h2>Please scan a valid QR code.</h2>
+            </div>
+            <LandingPageFooter></LandingPageFooter>
+          </>
+        }
+      </div>   
       ) : (
         <div>
           {!auth.user ? <LandingPageNav /> : <Navbar>Training Records</Navbar>}
+          {!loaded ? <Loader /> :
           <div className={styles.bttbg}>
             <p className={styles.profiletext}>
               <a className={styles.link} href='https://www.google.com'>
@@ -253,6 +267,7 @@ function Trainingrecords() {
               </form>
             </div>
           </div>
+        }
         </div>
       )}
     </>
